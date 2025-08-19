@@ -35,28 +35,26 @@
 
 <div class="container mt-5">
   <h2 class="mb-4 text-center">📖 Add New Entry</h2>
-  <form onsubmit="return validateForm()" class="shadow p-4 bg-white rounded">
-    <div class="mb-3">
-      <label class="form-label">📛Name</label>
-      <input type="text" id="name" class="form-control" placeholder="Enter Name">
-    </div>
-    <div class="mb-3">
-      <label class="form-label">📧Email</label>
-      <input type="email" id="email" class="form-control" placeholder="Enter Email">
-    </div>
-    <div class="mb-3">
-      <label class="form-label">📞Phone</label>
-      <input type="text" id="phone" class="form-control" placeholder="Enter 10-digit Phone">
-    </div>
-    <div class="d-flex justify-content-between">
+ <form method="POST" action="form.php" onsubmit="return validateForm()" class="shadow p-4 bg-white rounded">
+  <div class="mb-3">
+    <label class="form-label">📛Name</label>
+    <input type="text" id="name" name="name" class="form-control" placeholder="Enter Name">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">📧Email</label>
+    <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">📞Phone</label>
+    <input type="text" id="phone" name="phone" class="form-control" placeholder="Enter 10-digit Phone">
+  </div>
+  <div class="d-flex justify-content-between">
     <button type="submit" class="btn btn-success me-2">✅ Submit</button>
-    <div class="d-flex justify-content-center">
-      <button type="reset" class="btn btn-secondary">🧹 Clear</button>
-      </div>
+    <button type="reset" class="btn btn-secondary">🧹 Clear</button>
     <a href="index.html" class="btn btn-dark me-2">⬅️ Back to Home</a>
-    
+  </div>
+</form>
 
-  </form>
 </div>
 
 <footer class="text-center mt-5 p-3 bg-dark text-light">
