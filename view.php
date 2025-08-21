@@ -57,25 +57,34 @@ $result = $conn->query($sql);
         <th>Email</th>
         <th>Phone</th>
         <th>Created At</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      <?php
-      if ($result && $result->num_rows > 0) {
-          while($row = $result->fetch_assoc()) {
-              echo "<tr>
-                      <td>{$row['id']}</td>
-                      <td>{$row['name']}</td>
-                      <td>{$row['email']}</td>
-                      <td>{$row['phone']}</td>
-                      <td>{$row['created_at']}</td>
-                    </tr>";
-          }
-      } else {
-          echo "<tr><td colspan='5' class='text-center'>No entries found</td></tr>";
-      }
-      ?>
-    </tbody>
+<?php if ($result && $result->num_rows > 0): ?>
+    <?php while ($row = $result->fetch_assoc()): ?>
+        <tr>
+            <td><?= $row['id'] ?></td>
+            <td><?= htmlspecialchars($row['name']) ?></td>
+            <td><?= htmlspecialchars($row['email']) ?></td>
+            <td><?= htmlspecialchars($row['phone']) ?></td>
+            <td><?=htmlspecialchars($row['created_at'])?></td>
+            <td>
+                <a href="update.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-primary">Edit</a>
+                <a href="delete.php?id=<?= $row['id'] ?>" 
+                   class="btn btn-sm btn-danger" 
+                   onclick="return confirm('Are you sure you want to delete this record?');">
+                   Delete
+                </a>
+            </td>
+        </tr>
+    <?php endwhile; ?>
+<?php else: ?>
+    <tr>
+        <td colspan="5" class="text-center">No records found</td>
+    </tr>
+<?php endif; ?>
+</tbody>
   </table>
 
   <nav>
