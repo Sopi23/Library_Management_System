@@ -70,7 +70,7 @@ $result = $conn->query($sql);
             <td><?= htmlspecialchars($row['phone']) ?></td>
             <td><?=htmlspecialchars($row['created_at'])?></td>
             <td>
-                <a href="update.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-primary">Edit</a>
+                <a href="update.php? id=<?=$row['id']?>" class="btn btn-sm btn-primary">Edit</a>
                 <a href="delete.php?id=<?= $row['id'] ?>" 
                    class="btn btn-sm btn-danger" 
                    onclick="return confirm('Are you sure you want to delete this record?');">
