@@ -78,5 +78,15 @@ if (isset($_POST['update'])) {
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+document.getElementById("name").addEventListener("input", function() {
+let name = this.value;
+if(name.length < 3){
+this.style.borderColor = "red";
+} else {
+this.style.borderColor = "green";
+}
+});
+</script>
 </body>
 </html>
