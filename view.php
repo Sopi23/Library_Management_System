@@ -36,6 +36,7 @@ $result = $conn->query($sql);
 </head>
 <body>
 
+<<<<<<< HEAD
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
@@ -52,6 +53,75 @@ $result = $conn->query($sql);
         </ul>
       </div>
     </div>
+=======
+  <h2 class="mb-4">All Entries</h2>
+  <form method="GET" class="mb-3">
+    <input type="text" name="search" class="form-control"
+           placeholder="Search by Name or Email"
+           value="<?php echo htmlspecialchars($search); ?>">
+  </form>
+
+  <table class="table table-bordered table-striped table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Created At</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+<?php if ($result && $result->num_rows > 0): ?>
+    <?php while ($row = $result->fetch_assoc()): ?>
+        <tr>
+            <td><?= $row['id'] ?></td>
+            <td><?= htmlspecialchars($row['name']) ?></td>
+            <td><?= htmlspecialchars($row['email']) ?></td>
+            <td><?= htmlspecialchars($row['phone']) ?></td>
+            <td><?=htmlspecialchars($row['created_at'])?></td>
+            <td>
+                <a href="update.php? id=<?=$row['id']?>" class="btn btn-sm btn-primary">Edit</a>
+                <a href="delete.php?id=<?= $row['id'] ?>" 
+                   class="btn btn-sm btn-danger" 
+                   onclick="return confirm('Are you sure you want to delete this record?');">
+                   Delete
+                </a>
+            </td>
+        </tr>
+    <?php endwhile; ?>
+<?php else: ?>
+    <tr>
+        <td colspan="5" class="text-center">No records found</td>
+    </tr>
+<?php endif; ?>
+</tbody>
+  </table>
+
+  <nav>
+    <ul class="pagination">
+      <?php if ($page > 1): ?>
+        <li class="page-item">
+          <a class="page-link" href="?search=<?php echo urlencode($search); ?>&page=<?php echo $page - 1; ?>">Previous</a>
+        </li>
+      <?php endif; ?>
+
+      <?php for($i = 1; $i <= $pages; $i++): ?>
+        <li class="page-item <?php if($i == $page) echo 'active'; ?>">
+          <a class="page-link" href="?search=<?php echo urlencode($search); ?>&page=<?php echo $i; ?>">
+            <?php echo $i; ?>
+          </a>
+        </li>
+      <?php endfor; ?>
+
+      <?php if ($page < $pages): ?>
+        <li class="page-item">
+          <a class="page-link" href="?search=<?php echo urlencode($search); ?>&page=<?php echo $page + 1; ?>">Next</a>
+        </li>
+      <?php endif; ?>
+    </ul>
+>>>>>>> 5470314680a4fd2cb9ef76ef5198f53c64b2b822
   </nav>
 
   <!-- Main Content -->
