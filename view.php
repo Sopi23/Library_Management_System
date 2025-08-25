@@ -1,23 +1,15 @@
 <?php
 include 'config.php';
-
-// Search
 $search = isset($_GET['search']) ? $_GET['search'] : '';
-
-// Pagination
 $limit = 5;
 $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
 if ($page < 1) $page = 1;
 $start = ($page - 1) * $limit;
-
-// Count total records
 $countSql = "SELECT COUNT(*) AS total FROM entries 
              WHERE name LIKE '%$search%' OR email LIKE '%$search%' OR phone LIKE '%$search%'";
 $countResult = $conn->query($countSql);
 $total = $countResult->fetch_assoc()['total'];
 $pages = ceil($total / $limit);
-
-// Fetch records
 $sql = "SELECT * FROM entries 
         WHERE name LIKE '%$search%' OR email LIKE '%$search%' OR phone LIKE '%$search%'
         ORDER BY id DESC LIMIT $start, $limit";
@@ -35,9 +27,6 @@ $result = $conn->query($sql);
   </style>
 </head>
 <body>
-
-<<<<<<< HEAD
-  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Library System</a>
@@ -53,7 +42,6 @@ $result = $conn->query($sql);
         </ul>
       </div>
     </div>
-=======
   <h2 class="mb-4">All Entries</h2>
   <form method="GET" class="mb-3">
     <input type="text" name="search" class="form-control"
@@ -121,17 +109,13 @@ $result = $conn->query($sql);
         </li>
       <?php endif; ?>
     </ul>
->>>>>>> 5470314680a4fd2cb9ef76ef5198f53c64b2b822
   </nav>
 
-  <!-- Main Content -->
   <div class="container-fluid py-4">
     <div class="row justify-content-center">
       <div class="col-md-10 col-lg-12">
 
         <h2 class="mb-4">Entries List</h2>
-
-        <!-- Search -->
         <form method="get" class="mb-3 row g-2">
           <div class="col-md-6">
             <input type="text" name="search" value="<?= htmlspecialchars($search) ?>" class="form-control" placeholder="Search by name, email, or phone">
@@ -140,8 +124,6 @@ $result = $conn->query($sql);
             <button type="submit" class="btn btn-primary w-100">Search</button>
           </div>
         </form>
-
-        <!-- Table -->
         <div class="table-responsive">
           <table id="entriesTable" class="table table-bordered table-striped table-hover align-middle">
             <thead class="table-dark">
@@ -165,13 +147,9 @@ $result = $conn->query($sql);
                   <td><?= $row['created_at'] ?></td>
                   <td>
                     <a href="update.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-primary">Edit</a>
-
-                    <!-- Delete Button -->
                     <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $row['id'] ?>">
                       Delete
                     </button>
-
-                    <!-- Delete Modal -->
                     <div class="modal fade" id="deleteModal<?= $row['id'] ?>" tabindex="-1" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
@@ -199,8 +177,6 @@ $result = $conn->query($sql);
             </tbody>
           </table>
         </div>
-
-        <!-- Pagination -->
         <nav>
           <ul class="pagination justify-content-center">
             <?php if ($page > 1): ?>
@@ -222,8 +198,6 @@ $result = $conn->query($sql);
       </div>
     </div>
   </div>
-
-  <!-- Sorting Script -->
   <script>
   function sortTable(n) {
     let table, rows, switching, i, x, y, shouldSwitch;
@@ -248,8 +222,6 @@ $result = $conn->query($sql);
     }
   }
   </script>
-
-  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
